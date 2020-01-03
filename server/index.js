@@ -1,4 +1,3 @@
-  
 require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -36,7 +35,7 @@ var getWeatherCondition = async function(url) {
 };
 
 app.get('/api', async function (req, res) {
-  const secret = process.env.DARKSKY_API_SECRET; //TODO: fix secret to enviroment variable
+  const secret = process.env.DARKSKY_API_SECRET;
   const baseUrl = 'https://api.darksky.net/forecast';
   const endpoint = (latitude, longitude) => `${baseUrl}/${secret}/${latitude},${longitude}?units=auto`;
   const data = await getWeatherCondition(endpoint(req.query.latitude, req.query.longitude));
