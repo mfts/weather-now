@@ -1,0 +1,21 @@
+.current-condition {
+  text-align: center;
+}
+
+.temperature {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  &__status {
+    display: block;
+    font-size: 18px;
+    opacity: 1;
+    position: absolute;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform .3s cubic-bezier(.165, .84, .44, 1), opacity .3s ease-out;
+    width: 100%;
+    will-change: transform, opacity;
+  }
+}
