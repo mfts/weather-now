@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const currentConditions = require('./routes/Accuweather/currentConditions');
 const forecast = require('./routes/Darksky/forecast')
 
 const express = require('express');
@@ -23,16 +24,7 @@ app.get('/', function (req, res) {
   res.status(200).send(data);
 });
 
-
-app.post('/api/accuweather', async function (req, res) {
-  console.log(req.body)
-  const secret = process.env.ACCUWEATHER_API_KEY;
-  const baseUrl = 'http://dataservice.accuweather.com/currentconditions/v1';
-  const endpoint = (locationKey, detailsYes) => `${baseUrl}/${locationKey}?apikey=${secret}&details=${detailsYes}`;
-  const data = await getWeatherCondition(endpoint(req.body.locationKey, req.body.detailsYes));
-
-  res.status(200).send(data)
-})
 app.get('/api/darksky', forecast);
+app.post('/api/accuweather', currentConditions)
 
 const server = app.listen(PORT, () => console.log(`app running on port: ${server.address().port}`));
