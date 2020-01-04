@@ -1,9 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
-const fetch = require('node-fetch');
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -21,18 +19,6 @@ app.get('/', function (req, res) {
   };
   res.status(200).send(data);
 });
-
-
-var getWeatherCondition = async function(url) {
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-
-    return result;
-  } catch (error) {
-    return error.message;
-  }
-};
 
 app.get('/api', async function (req, res) {
   const secret = process.env.DARKSKY_API_SECRET;
