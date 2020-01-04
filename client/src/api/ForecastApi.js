@@ -1,6 +1,6 @@
 class ForecastApi {
   constructor() {
-    this.endpoint = (latitude, longitude) => `${process.env.REACT_APP_API_BASE_URL}/api?latitude=${latitude}&longitude=${longitude}`;
+    this.endpoint = (latitude, longitude) => `${process.env.REACT_APP_API_BASE_URL}/api/darksky?latitude=${latitude}&longitude=${longitude}`;
     this.data = null;
   }
 
