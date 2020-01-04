@@ -1,4 +1,7 @@
 require('dotenv').config()
+
+const forecast = require('./routes/Darksky/forecast')
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
@@ -20,14 +23,6 @@ app.get('/', function (req, res) {
   res.status(200).send(data);
 });
 
-app.get('/api', async function (req, res) {
-  const secret = process.env.DARKSKY_API_SECRET;
-  const baseUrl = 'https://api.darksky.net/forecast';
-  const endpoint = (latitude, longitude) => `${baseUrl}/${secret}/${latitude},${longitude}?units=auto`;
-  const data = await getWeatherCondition(endpoint(req.query.latitude, req.query.longitude));
-
-  res.status(200).send(data);
-});
 
 app.post('/api/accuweather', async function (req, res) {
   console.log(req.body)
@@ -38,5 +33,6 @@ app.post('/api/accuweather', async function (req, res) {
 
   res.status(200).send(data)
 })
+app.get('/api/darksky', forecast);
 
 const server = app.listen(PORT, () => console.log(`app running on port: ${server.address().port}`));
